@@ -1,0 +1,7 @@
+# IDE / editor
+.cursor/
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
