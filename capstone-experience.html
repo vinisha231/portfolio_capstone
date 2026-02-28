@@ -24,20 +24,20 @@
   </header>
 
   <main class="container">
-    <p>This page presents the major parts of the capstone and how they evolved. Each section has a theme, a short description, and artifacts with narratives. Replace placeholder artifacts and text with your own (screenshots, diagrams, code snippets, README excerpts, etc.) and expand the narratives to reflect your decisions, pivots, and growth.</p>
+    <p>This page unfolds the capstone from early architecture through first design, problems encountered, pivots, updated system, testing, and results. Each theme includes artifacts (diagrams, screenshots, evolution) and technical reasoning to show how the work developed over the capstone.</p>
 
-    <h2>Architecture</h2>
+    <h2>Early Architecture</h2>
     <p>The system is split into a React frontend and a FastAPI backend. The frontend talks to the backend over REST; the backend uses AWS Bedrock for question generation and evaluation, and PostgreSQL (e.g., on AWS RDS) for users and interview sessions. Authentication is token-based (e.g., JWT) so the same API can serve the web app and future clients.</p>
     <h3>Artifact: System diagram</h3>
     <div class="artifact">
       <figure>
         <img src="images/architecture.png" alt="Diagram showing frontend, API, Bedrock, and database.">
-        <figcaption>System architecture (replace images/architecture.png with your diagram).</figcaption>
+        <figcaption>System architecture.</figcaption>
       </figure>
     </div>
-    <p><em>Narrative: Describe how you chose this split (e.g., separation of concerns, deployment flexibility), and any changes from an earlier design (e.g., adding RDS, moving from mock to Bedrock).</em></p>
+    <p>Description.</p>
 
-    <h2>UX/UI and Interview Flow</h2>
+    <h2>First Design and UX/UI</h2>
     <p>The user flow centers on login/signup, choosing role/company/difficulty and interview type, then a question–answer–feedback loop with optional follow-ups and session notes. The dashboard shows stats and history once enough sessions are completed.</p>
     <h3>Artifact: Screenshots of key screens</h3>
     <div class="artifact">
@@ -54,25 +54,23 @@
         <figcaption>Dashboard: stats and history.</figcaption>
       </figure>
     </div>
-    <p><em>Narrative: Discuss layout and interaction choices (e.g., single-page flow, theme toggle, draft resume), and any iterations (e.g., adding role/company, difficulty, or session notes).</em></p>
+    <p>Description.</p>
 
-    <h2>Backend and API</h2>
+    <h2>Database and API</h2>
     <p>The backend exposes endpoints for auth, interview (generate-question, evaluate, followup), sessions (create, list), and dashboard (stats, history). It uses Pydantic for request/response models and connects to Bedrock and the database.</p>
     <h3>Artifact: Key code or API design</h3>
     <div class="artifact">
-      <p><em>Include a short snippet of a key algorithm or endpoint (e.g., evaluation pipeline, session persistence) or a table of main API routes. Explain why this part was critical or tricky.</em></p>
-      <!-- Optional: paste code snippet or add image: <img src="images/api-routes.png" alt="Table or diagram of main API routes."> -->
+      <p>Description.</p>
     </div>
-    <p><em>Narrative: Explain technology choices (e.g., FastAPI, async), how you integrated Bedrock and the DB, and any pivots (e.g., from mocks to live Bedrock, schema changes).</em></p>
+    <p>Description.</p>
 
-    <h2>AI Integration (Bedrock)</h2>
+    <h2>AI Prompts and Integration (Bedrock)</h2>
     <p>Question generation and answer evaluation are driven by an LLM via AWS Bedrock. Prompts are tailored by interview type, role, company, and difficulty so questions and feedback stay relevant.</p>
     <h3>Artifact: Prompts or evaluation logic</h3>
     <div class="artifact">
-      <p><em>Optionally include sanitized prompt templates or a short description of how you structured the evaluation (e.g., rubric, score range, strength_highlight for the dashboard).</em></p>
-      <!-- Optional: <img src="images/prompts.png" alt="Sample prompt structure or evaluation rubric."> -->
+      <p>Description.</p>
     </div>
-    <p><em>Narrative: Describe how you designed and iterated on prompts, how you handled reliability and errors, and how evaluation results feed into the dashboard (e.g., strengths/weaknesses).</em></p>
+    <p>Description.</p>
 
     <h2>Data Model and Persistence</h2>
     <p>User accounts and interview sessions (type, role, company, difficulty, question, answer, feedback, score, notes, timestamps) are stored in PostgreSQL. Migrations (e.g., Alembic) track schema changes such as adding role, company, difficulty, or strength_highlight.</p>
@@ -80,16 +78,27 @@
     <div class="artifact">
       <figure>
         <img src="images/data-model.png" alt="Entity-relationship or UML diagram of users and interview sessions.">
-        <figcaption>Data model (replace images/data-model.png with your diagram).</figcaption>
+        <figcaption>Data model.</figcaption>
       </figure>
     </div>
-    <p><em>Narrative: Explain schema decisions and trade-offs, and how the data model supports the dashboard and future features.</em></p>
+    <p>Description.</p>
+
+    <h2>Pivots and Iteration</h2>
+    <p>Description.</p>
+    <h3>Artifact: Before/after or evolution</h3>
+    <div class="artifact">
+      <p>Description.</p>
+    </div>
 
     <h2>Testing and Quality</h2>
-    <p><em>If you have a test plan, sample tests, or results (e.g., manual test matrix, pytest coverage), add them here with a short narrative on what you tested and what you would improve with more time.</em></p>
+    <p>Description.</p>
+    <h3>Artifact: Test results or coverage</h3>
+    <div class="artifact">
+      <p>Description.</p>
+    </div>
 
-    <h2>Future Plans</h2>
-    <p><em>Briefly describe what you would do next: e.g., voice (Polly/Transcribe), full AWS deployment (Elastic Beanstalk, Amplify), more interview types, or improved analytics.</em></p>
+    <h2>Results and Future Plans</h2>
+    <p>Description. Summarize outcomes and next steps.</p>
 
     <p><a href="index.html" class="back-link">← Back to portfolio home</a></p>
   </main>
