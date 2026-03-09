@@ -1,5 +1,4 @@
 # IDE / editor
-.cursor/
 .idea/
 .vscode/
 *.swp

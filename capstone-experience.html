@@ -31,74 +31,94 @@
     <h3>Artifact: System diagram</h3>
     <div class="artifact">
       <figure>
-        <img src="images/architecture.png" alt="Diagram showing frontend, API, Bedrock, and database.">
+        <!-- INSERT: Add file images/architecture.png (system diagram: React, FastAPI, Bedrock, PostgreSQL) -->
+        <img src="images/architecture.png" alt="System architecture: React frontend, FastAPI backend, AWS Bedrock for LLM, PostgreSQL for users and sessions.">
         <figcaption>System architecture.</figcaption>
       </figure>
+      <p><strong>INSERT:</strong> One or two sentences describing your diagram—how the frontend, API, Bedrock, and database connect and why you chose this layout.</p>
     </div>
-    <p>Description.</p>
 
     <h2>First Design and UX/UI</h2>
     <p>The user flow centers on login/signup, choosing role/company/difficulty and interview type, then a question–answer–feedback loop with optional follow-ups and session notes. The dashboard shows stats and history once enough sessions are completed.</p>
-    <h3>Artifact: Screenshots of key screens</h3>
+
+    <h3>Artifact: Setup screen</h3>
     <div class="artifact">
       <figure>
+        <!-- INSERT: Add file images/screenshot-setup.png -->
         <img src="images/screenshot-setup.png" alt="Interview setup screen: role, company, difficulty, and interview type selection.">
         <figcaption>Setup: role, company, difficulty, interview type.</figcaption>
       </figure>
+      <p><strong>INSERT:</strong> Short narrative for this screenshot—what the viewer sees, how this screen fits into the flow, and any design decisions (e.g. why this layout, how you chose the options).</p>
+    </div>
+
+    <h3>Artifact: Interview (question / answer / feedback)</h3>
+    <div class="artifact">
       <figure>
+        <!-- INSERT: Add file images/screenshot-interview.png -->
         <img src="images/screenshot-interview.png" alt="Question, answer, and feedback view during an interview.">
         <figcaption>Question/answer/feedback flow.</figcaption>
       </figure>
+      <p><strong>INSERT:</strong> Short narrative for this screenshot—how the question, answer input, and feedback are presented and any UX choices (e.g. scoring, follow-ups).</p>
+    </div>
+
+    <h3>Artifact: Dashboard</h3>
+    <div class="artifact">
       <figure>
+        <!-- INSERT: Add file images/screenshot-dashboard.png -->
         <img src="images/screenshot-dashboard.png" alt="Dashboard with stats and interview history.">
         <figcaption>Dashboard: stats and history.</figcaption>
       </figure>
+      <p><strong>INSERT:</strong> Short narrative for this screenshot—what stats and history the user sees and how this supports their practice (e.g. strengths, areas to improve).</p>
     </div>
-    <p>Description.</p>
 
     <h2>Database and API</h2>
     <p>The backend exposes endpoints for auth, interview (generate-question, evaluate, followup), sessions (create, list), and dashboard (stats, history). It uses Pydantic for request/response models and connects to Bedrock and the database.</p>
     <h3>Artifact: Key code or API design</h3>
     <div class="artifact">
-      <p>Description.</p>
+      <p><strong>INSERT:</strong> Paste a short snippet of key API design (e.g. endpoint list, Pydantic model, or route handler) or a code block. Example:</p>
+      <pre><code># INSERT: e.g. POST /api/interview/generate-question
+# or a few lines of your FastAPI route or request/response model</code></pre>
     </div>
-    <p>Description.</p>
+    <p><strong>INSERT:</strong> One or two sentences on how this API design supports the interview flow (e.g. why these endpoints, how auth or session handling works).</p>
 
     <h2>AI Prompts and Integration (Bedrock)</h2>
     <p>Question generation and answer evaluation are driven by an LLM via AWS Bedrock. Prompts are tailored by interview type, role, company, and difficulty so questions and feedback stay relevant.</p>
     <h3>Artifact: Prompts or evaluation logic</h3>
     <div class="artifact">
-      <p>Description.</p>
+      <p><strong>INSERT:</strong> Paste your question-generation or answer-evaluation prompt (or a shortened version) and/or a few lines of evaluation logic. Example:</p>
+      <pre><code># INSERT: e.g. "You are an interviewer. Generate one technical question for role X, difficulty Y..."
+# or the structure of your evaluation (score + feedback criteria)</code></pre>
     </div>
-    <p>Description.</p>
+    <p><strong>INSERT:</strong> One or two sentences on how the prompts are tailored (e.g. by role, difficulty, interview type) and how evaluation produces a score and feedback.</p>
 
     <h2>Data Model and Persistence</h2>
     <p>User accounts and interview sessions (type, role, company, difficulty, question, answer, feedback, score, notes, timestamps) are stored in PostgreSQL. Migrations (e.g., Alembic) track schema changes such as adding role, company, difficulty, or strength_highlight.</p>
     <h3>Artifact: Data model or UML</h3>
     <div class="artifact">
       <figure>
+        <!-- INSERT: Add file images/data-model.png -->
         <img src="images/data-model.png" alt="Entity-relationship or UML diagram of users and interview sessions.">
         <figcaption>Data model.</figcaption>
       </figure>
+      <p><strong>INSERT:</strong> One or two sentences describing your data model—main entities (e.g. User, Session), key fields, and how sessions relate to users and store questions/answers/scores.</p>
     </div>
-    <p>Description.</p>
 
     <h2>Pivots and Iteration</h2>
-    <p>Description.</p>
+    <p><strong>INSERT:</strong> Describe what changed during the capstone—e.g. a feature that didn’t work, feedback that led to a pivot, or an architecture change. Why you pivoted and what the result was.</p>
     <h3>Artifact: Before/after or evolution</h3>
     <div class="artifact">
-      <p>Description.</p>
+      <p><strong>INSERT:</strong> Add a before/after diagram, screenshot, or short code comparison, or describe the evolution in a few bullet points. Optional: add an image (e.g. <code>images/pivot-before-after.png</code>).</p>
     </div>
 
     <h2>Testing and Quality</h2>
-    <p>Description.</p>
+    <p><strong>INSERT:</strong> How you tested the capstone (e.g. unit tests, API tests, manual UX testing) and any quality measures (e.g. test plan, coverage, or user feedback).</p>
     <h3>Artifact: Test results or coverage</h3>
     <div class="artifact">
-      <p>Description.</p>
+      <p><strong>INSERT:</strong> Paste a screenshot of test results or coverage report, or a short summary (e.g. “X tests for API, Y for frontend”). Optional: add image <code>images/test-results.png</code>.</p>
     </div>
 
     <h2>Results and Future Plans</h2>
-    <p>Description. Summarize outcomes and next steps.</p>
+    <p><strong>INSERT:</strong> Summarize outcomes (what works, what you delivered) and next steps—e.g. features you’d add, deployment plans, or how you’ll use this in your portfolio or LinkedIn.</p>
 
     <p><a href="index.html" class="back-link">← Back to portfolio home</a></p>
   </main>

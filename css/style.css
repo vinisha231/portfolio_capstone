@@ -146,6 +146,21 @@ a:hover, a:focus {
   color: var(--text-muted);
 }
 
+.artifact pre {
+  margin: 0.5rem 0;
+  padding: 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+}
+
+.artifact code {
+  font-family: ui-monospace, monospace;
+  color: var(--text);
+}
+
 /* Bibliography */
 .bib-section {
   margin-bottom: 2rem;
