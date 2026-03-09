@@ -1,9 +1,9 @@
-Add these image files to this folder (capstone-experience.html references them):
+Images used by capstone-experience.html:
 
-  architecture.png    - System architecture diagram (frontend, API, Bedrock, DB)
-  screenshot-setup.png - Screenshot: interview setup (role, company, difficulty, type)
-  screenshot-interview.png - Screenshot: question / answer / feedback during interview
-  screenshot-dashboard.png - Screenshot: dashboard with stats and history
-  data-model.png      - Data model or ER/UML diagram (users, sessions)
+Setup flow (7):     setup-01.png through setup-07.png
+Interview flow (16): interview-01.png through interview-16.png
+Dashboard (3):      dashboard-01.png through dashboard-03.png
 
-Keep filenames exactly as above, or update the src paths in capstone-experience.html.
+Still optional (add if you have them):
+  architecture.png  - System architecture diagram
+  data-model.png    - Data model or ER/UML diagram

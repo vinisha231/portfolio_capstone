@@ -146,6 +146,25 @@ a:hover, a:focus {
   color: var(--text-muted);
 }
 
+/* Grid of screenshots (multiple images per section) */
+.screenshot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.screenshot-grid figure {
+  margin: 0;
+}
+
+.screenshot-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
 .artifact pre {
   margin: 0.5rem 0;
   padding: 1rem;
