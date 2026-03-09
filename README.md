@@ -2,7 +2,9 @@
 
 A portfolio site showcasing the **Interview Simulator** capstone project. It is a **separate repository** from the main capstone codebase.
 
-Live site: https://vinisha231.github.io/portfolio_capstone/index.html
+Live site: https://vinisha231.github.io/portfolio_capstone/index.html  
+
+**For assignments:** Submit the **landing page** URL (the link above, or `.../index.html`). Do not submit the Overall Capstone page URL.
 
 ## Pages
 

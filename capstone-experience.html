@@ -10,12 +10,11 @@
   <header>
     <div class="container">
       <h1>Interview Simulator</h1>
-      <p class="subtitle">Capstone Experience</p>
       <nav aria-label="Main">
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="the-user.html">The User</a></li>
-          <li><a href="capstone-experience.html">Capstone Experience</a></li>
+          <li><a href="capstone-experience.html" class="active">Capstone Experience</a></li>
           <li><a href="annotated-bibliography.html">Annotated Bibliography</a></li>
           <li><a href="overall-capstone.html">Overall Capstone</a></li>
         </ul>
@@ -24,6 +23,7 @@
   </header>
 
   <main class="container">
+    <h2 class="page-title">Capstone Experience</h2>
     <p>This page unfolds the capstone from early architecture through first design, problems encountered, pivots, updated system, testing, and results. Each theme includes artifacts (diagrams, screenshots, evolution) and technical reasoning to show how the work developed over the capstone.</p>
 
     <h2>Early Architecture</h2>
@@ -31,8 +31,7 @@
     <h3>Artifact: System diagram</h3>
     <div class="artifact">
       <figure>
-        <!-- INSERT: Add file images/architecture.png (system diagram: React, FastAPI, Bedrock, PostgreSQL) -->
-        <img src="images/architecture.png" alt="System architecture: React frontend, FastAPI backend, AWS Bedrock for LLM, PostgreSQL for users and sessions.">
+        <img src="images/arch.png" alt="System architecture: React frontend, FastAPI backend, AWS Bedrock for LLM, PostgreSQL for users and sessions.">
         <figcaption>System architecture.</figcaption>
       </figure>
       <p>The diagram shows the split: the React frontend runs in the browser and calls the FastAPI backend over REST (CORS is configured so the frontend origin can call the API). The backend uses <code>SessionLocal</code> for PostgreSQL (e.g. on AWS RDS or another provider via <code>DATABASE_URL</code>) for users and interview sessions; it calls AWS Bedrock (<code>bedrock-runtime</code>) for question generation and answer evaluation. Auth is token-based so the same API can serve the web app and future clients. This layout keeps the LLM and data behind one API and simplifies deployment (e.g. backend on Elastic Beanstalk, frontend elsewhere).</p>
@@ -150,11 +149,6 @@ Return ONLY the question, no additional text.
     <p>User accounts and interview sessions are stored in PostgreSQL; <code>DATABASE_URL</code> is loaded from env (including Elastic Beanstalk <code>get-config</code> when present). SQLAlchemy <code>Base</code>, <code>engine</code>, and <code>SessionLocal</code> are defined in <code>app/database.py</code>; Alembic is used for migrations.</p>
     <h3>Artifact: Data model or UML</h3>
     <div class="artifact">
-      <figure>
-        <!-- INSERT: Add file images/data-model.png -->
-        <img src="images/data-model.png" alt="Entity-relationship or UML diagram of users and interview sessions.">
-        <figcaption>Data model.</figcaption>
-      </figure>
       <p><strong>From the code.</strong> <code>User</code> (<code>app/models/user.py</code>): <code>id</code>, <code>username</code>, <code>email</code>, <code>hashed_password</code>, <code>full_name</code>, <code>is_active</code>, <code>created_at</code>, <code>updated_at</code>. <code>InterviewSession</code> (<code>app/models/session.py</code>): <code>id</code>, <code>user_id</code> (FK to <code>users.id</code>), <code>role</code>, <code>company</code>, <code>interview_type</code>, <code>difficulty</code>, <code>question</code>, <code>user_answer</code>, <code>feedback</code>, <code>score</code>, <code>strength_highlight</code>, <code>notes</code>, <code>created_at</code>, <code>time_spent_seconds</code>, <code>session_total_seconds</code>. Each saved “round” is one row (one question–answer–feedback set); the dashboard aggregates by <code>user_id</code> for stats and history.</p>
     </div>
 
@@ -162,14 +156,14 @@ Return ONLY the question, no additional text.
     <p>When Bedrock is unavailable (e.g. missing credentials or region limits), the backend falls back to a curated list of questions per interview type and difficulty instead of failing the request. In <code>app/routers/interview.py</code>, <code>generate_question</code> calls Bedrock first; on exception it logs a warning and selects a random question from the fallback dict (technical/behavioral/design × easy/medium/hard). The response includes a <code>model</code> field (<code>"bedrock"</code> or <code>"local-fallback"</code>) so the frontend can show where the question came from. Similarly, evaluation and follow-up use try/except so the app degrades gracefully. Deployment moved to AWS Elastic Beanstalk (see <code>.ebextensions</code>, <code>Procfile</code>, <code>Dockerfile</code> in the backend); environment variables are loaded from the EB console or <code>get-config</code> so <code>DATABASE_URL</code> and <code>AWS_REGION</code> work in production.</p>
     <h3>Artifact: Before/after or evolution</h3>
     <div class="artifact">
-      <p>Evolution: (1) Question flow — from fixed sample questions to Bedrock-generated with fallback. (2) Evaluation — from simple scoring to rubric-based, type-specific feedback with <code>strength_highlight</code> and JSON output. (3) Deployment — local only to Elastic Beanstalk with env-based config. <strong>INSERT:</strong> Optional: add a before/after diagram or screenshot (<code>images/pivot-before-after.png</code>) if you have one.</p>
+      <p>Evolution: (1) Question flow — from fixed sample questions to Bedrock-generated with fallback. (2) Evaluation — from simple scoring to rubric-based, type-specific feedback with <code>strength_highlight</code> and JSON output. (3) Deployment — local only to Elastic Beanstalk with env-based config. A before/after diagram or screenshot can be added to <code>images/</code> if you want to visualize the pivot.</p>
     </div>
 
     <h2>Testing and Quality</h2>
     <p>The backend includes a <code>tests</code> directory for API and service tests. Quality measures used during development: manual testing of the interview flow (generate question → submit answer → evaluate → save session), validation of request/response shapes via Pydantic, and low-quality-answer checks in the evaluate endpoint (e.g. minimum length and token diversity for behavioral so very short or repetitive answers get a gentle prompt to expand). CORS and auth are configured so the frontend can call the API from the correct origin and with a valid token.</p>
     <h3>Artifact: Test results or coverage</h3>
     <div class="artifact">
-      <p>Backend tests live under <code>backend/tests</code>. <strong>INSERT:</strong> If you have a test plan, coverage report, or screenshot of test results, add it here or use <code>images/test-results.png</code>.</p>
+      <p>Backend tests live under <code>backend/tests</code>. A test plan, coverage report, or screenshot of test results can be added here (e.g. <code>images/test-results.png</code>) to showcase test outcomes.</p>
     </div>
 
     <h2>Results and Future Plans</h2>
