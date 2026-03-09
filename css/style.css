@@ -1,21 +1,11 @@
-/* ============================================================
-   Portfolio — Warm Editorial / Museum Catalogue
-   Overall: Warm, unhurried, typographically confident.
-   Not cold or corporate: parchment background, brass accents,
-   sticky charcoal header with grain, italic serif wordmark,
-   sliding brass underlines on nav, artifact cards that lift on
-   hover, code in warm near-black, bibliography like pull-quotes,
-   hr with ✦, dark mode like candlelight.
-   ============================================================ */
-
    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
 
    /* ── Tokens ─────────────────────────────────────────────── */
    :root {
-     /* Palette — warm off-white ground, deep charcoal, brass accent */
-     --bg:            #f5f3ef;
-     --bg-2:          #ede9e2;
-     --surface:       #faf9f7;
+     /* Palette — light warm off-white ground, deep charcoal, brass accent */
+     --bg:            #faf9f7;
+     --bg-2:          #f5f3ef;
+     --surface:       #fcfbf9;
      --surface-raised: #ffffff;
      --text:          #1c1a17;
      --text-secondary: #5a5550;
@@ -69,7 +59,7 @@
      color: var(--text);
      background-color: var(--bg);
      background-image:
-       radial-gradient(ellipse 80% 50% at 50% -20%, rgba(122,92,46,.06) 0%, transparent 70%);
+       radial-gradient(ellipse 80% 50% at 50% -20%, rgba(122,92,46,.04) 0%, transparent 70%);
      min-height: 100vh;
      -webkit-font-smoothing: antialiased;
      -moz-osx-font-smoothing: grayscale;
@@ -77,9 +67,10 @@
    
    /* ── Layout ──────────────────────────────────────────────── */
    .container {
-     max-width: 860px;
+     max-width: min(1400px, 96vw);
+     width: 100%;
      margin-inline: auto;
-     padding-inline: clamp(1.25rem, 5vw, 3rem);
+     padding-inline: clamp(1.5rem, 4vw, 3rem);
      padding-block: var(--space-lg) var(--space-2xl);
    }
    
