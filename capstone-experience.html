@@ -72,27 +72,65 @@
     </div>
 
     <h2>Database and API</h2>
-    <p>The backend exposes endpoints for auth, interview (generate-question, evaluate, followup), sessions (create, list), and dashboard (stats, history). It uses Pydantic for request/response models and connects to Bedrock and the database.</p>
+    <p>The backend exposes endpoints for auth, interview (generate-question, evaluate, followup), sessions (create, list), and dashboard (stats, history). It uses Pydantic for request/response models and connects to Bedrock and the database. SQLAlchemy and a <code>SessionLocal</code> dependency provide database access; auth uses JWT so the same API can serve the web app and future clients.</p>
     <h3>Artifact: Key code or API design</h3>
     <div class="artifact">
-      <p><strong>INSERT:</strong> Paste a short snippet of key API design (e.g. endpoint list, Pydantic model, or route handler) or a code block. Example:</p>
-      <pre><code># INSERT: e.g. POST /api/interview/generate-question
-# or a few lines of your FastAPI route or request/response model</code></pre>
+      <p><strong>API structure.</strong> Routers are mounted in <code>app/main.py</code>: <code>auth</code>, <code>interview</code>, <code>sessions</code>, <code>dashboard</code>. Key interview endpoints:</p>
+      <ul>
+        <li><code>GET /api/interview/generate-question</code> — query params: <code>interview_type</code>, <code>difficulty</code>, <code>role</code>, <code>company</code>, <code>language</code>; returns a generated question (Bedrock or fallback).</li>
+        <li><code>POST /api/interview/evaluate</code> — body: <code>question</code>, <code>user_answer</code>, <code>interview_type</code>, <code>role</code>, <code>company</code>; returns <code>feedback</code>, <code>score</code>, <code>suggestions</code>, <code>strength_highlight</code>.</li>
+        <li><code>POST /api/interview/followup</code> — body: <code>question</code>, <code>user_answer</code>, <code>interview_type</code>, <code>history</code>; returns a follow-up question.</li>
+      </ul>
+      <p><strong>Request/response models (Pydantic).</strong> From <code>app/routers/interview.py</code> and <code>app/models/schemas.py</code>:</p>
+      <pre><code>class InterviewRequest(BaseModel):
+    question: str
+    user_answer: str
+    interview_type: Optional[str] = "technical"
+    role: Optional[str] = None
+    company: Optional[str] = None
+
+class InterviewResponse(BaseModel):
+    feedback: str
+    score: int
+    suggestions: List[str]
+    strength_highlight: Optional[str] = None</code></pre>
+      <p>Sessions are created via <code>POST /api/sessions/</code> with <code>SessionCreate</code> (interview_type, role, company, difficulty, question, user_answer, feedback, score, strength_highlight, notes, time_spent_seconds). <code>GET /api/sessions/</code> lists the current user’s sessions (auth via <code>get_current_active_user</code>).</p>
     </div>
-    <p><strong>INSERT:</strong> One or two sentences on how this API design supports the interview flow (e.g. why these endpoints, how auth or session handling works).</p>
+    <p>This design keeps the interview flow clear: the frontend calls generate-question to get a question, the user answers, then evaluate returns feedback and score; the client can save the round via sessions and optionally request a followup. Auth ensures sessions and dashboard data are scoped to the logged-in user.</p>
 
     <h2>AI Prompts and Integration (Bedrock)</h2>
-    <p>Question generation and answer evaluation are driven by an LLM via AWS Bedrock. Prompts are tailored by interview type, role, company, and difficulty so questions and feedback stay relevant.</p>
+    <p>Question generation and answer evaluation are driven by an LLM via AWS Bedrock (<code>bedrock-runtime</code> in <code>us-east-1</code>, model configurable via <code>BEDROCK_MODEL_ID</code>; default Claude 3 Sonnet). The service in <code>app/services/bedrock_service.py</code> uses a single <code>_invoke_model</code> helper that supports both Claude (Messages API) and Llama 2 (prompt-based) formats. Prompts are tailored by interview type, role, company, difficulty, and (for technical) programming language so questions and feedback stay relevant.</p>
     <h3>Artifact: Prompts or evaluation logic</h3>
     <div class="artifact">
-      <p><strong>INSERT:</strong> Paste your question-generation or answer-evaluation prompt (or a shortened version) and/or a few lines of evaluation logic. Example:</p>
-      <pre><code># INSERT: e.g. "You are an interviewer. Generate one technical question for role X, difficulty Y..."
-# or the structure of your evaluation (score + feedback criteria)</code></pre>
+      <p><strong>Question generation.</strong> System prompt and user prompt are built from role, company, and language:</p>
+      <pre><code>system_prompt = (
+    f"You are an expert {interview_type} interviewer. Generate relevant, challenging "
+    f"interview questions for {role_context}{company_context} that assess both technical "
+    "knowledge and communication skills." + lang_context
+)
+prompt = f"""Generate a {difficulty} difficulty {interview_type} interview question.
+Role: {role_context}{company_context}
+{f'Programming language: {language.strip()}.' if language else ''}
+...
+Return ONLY the question, no additional text.
+"""</code></pre>
+      <p><strong>Answer evaluation.</strong> Each interview type has a rubric (<code>_rubric_for_type</code>): technical (problem understanding, approach, technical accuracy, complexity/edge cases, communication; score 0–100 vs a standard baseline), behavioral (STAR: situation, task, action, result), design (requirements, high-level design, key components, scalability, trade-offs). The model is asked to return JSON:</p>
+      <pre><code>{
+  "strength_highlight": "1-2 sentences on what they did well",
+  "feedback": "Strength first, then rubric-based feedback.",
+  "communication_score": 1-5,
+  "technical_score": 1-5,
+  "problem_solving_score": 1-5,
+  "professional_tone_score": 1-5,
+  "overall_score": 0-100,
+  "suggestions": ["suggestion1", "suggestion2", "suggestion3"]
+}</code></pre>
+      <p>For technical answers, the prompt tells the evaluator to compare to the standard/canonical solution (e.g. correct time/space complexity). The router maps <code>overall_score</code> to the 0–100 response; if the model omits it, a fallback is computed from the four 1–5 dimension scores. Follow-up generation uses the same client with a prompt that builds on the last Q&amp;A and, for technical, can ask specifically for time/space complexity.</p>
     </div>
-    <p><strong>INSERT:</strong> One or two sentences on how the prompts are tailored (e.g. by role, difficulty, interview type) and how evaluation produces a score and feedback.</p>
+    <p>Tailoring by type and difficulty keeps questions appropriate for the chosen mode; the rubric and JSON contract keep evaluation consistent and parseable so the frontend can show scores, strength highlights, and suggestions without scraping free text.</p>
 
     <h2>Data Model and Persistence</h2>
-    <p>User accounts and interview sessions (type, role, company, difficulty, question, answer, feedback, score, notes, timestamps) are stored in PostgreSQL. Migrations (e.g., Alembic) track schema changes such as adding role, company, difficulty, or strength_highlight.</p>
+    <p>User accounts and interview sessions are stored in PostgreSQL; <code>DATABASE_URL</code> is loaded from env (including Elastic Beanstalk <code>get-config</code> when present). SQLAlchemy <code>Base</code>, <code>engine</code>, and <code>SessionLocal</code> are defined in <code>app/database.py</code>; Alembic is used for migrations.</p>
     <h3>Artifact: Data model or UML</h3>
     <div class="artifact">
       <figure>
@@ -100,7 +138,7 @@
         <img src="images/data-model.png" alt="Entity-relationship or UML diagram of users and interview sessions.">
         <figcaption>Data model.</figcaption>
       </figure>
-      <p><strong>INSERT:</strong> One or two sentences describing your data model—main entities (e.g. User, Session), key fields, and how sessions relate to users and store questions/answers/scores.</p>
+      <p><strong>From the code.</strong> <code>User</code> (<code>app/models/user.py</code>): <code>id</code>, <code>username</code>, <code>email</code>, <code>hashed_password</code>, <code>full_name</code>, <code>is_active</code>, <code>created_at</code>, <code>updated_at</code>. <code>InterviewSession</code> (<code>app/models/session.py</code>): <code>id</code>, <code>user_id</code> (FK to <code>users.id</code>), <code>role</code>, <code>company</code>, <code>interview_type</code>, <code>difficulty</code>, <code>question</code>, <code>user_answer</code>, <code>feedback</code>, <code>score</code>, <code>strength_highlight</code>, <code>notes</code>, <code>created_at</code>, <code>time_spent_seconds</code>, <code>session_total_seconds</code>. Each saved “round” is one row (one question–answer–feedback set); the dashboard aggregates by <code>user_id</code> for stats and history.</p>
     </div>
 
     <h2>Pivots and Iteration</h2>
