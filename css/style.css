@@ -1,7 +1,11 @@
 /* ============================================================
-   Portfolio — Refined Editorial Style
-   Aesthetic: Luxury editorial / museum catalogue
-   Typographic hierarchy, generous space, subtle depth
+   Portfolio — Warm Editorial / Museum Catalogue
+   Overall: Warm, unhurried, typographically confident.
+   Not cold or corporate: parchment background, brass accents,
+   sticky charcoal header with grain, italic serif wordmark,
+   sliding brass underlines on nav, artifact cards that lift on
+   hover, code in warm near-black, bibliography like pull-quotes,
+   hr with ✦, dark mode like candlelight.
    ============================================================ */
 
    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
@@ -100,11 +104,12 @@
      gap: 0;
    }
    
-   /* Site title / wordmark */
+   /* Site title / wordmark — large, lightweight, italic (editorial) */
    h1 {
      font-family: var(--font-display);
      font-size: clamp(1.5rem, 3.5vw, 2rem);
      font-weight: 300;
+     font-style: italic;
      letter-spacing: .03em;
      color: var(--nav-text);
      line-height: 1.2;
@@ -178,6 +183,7 @@
    }
    
    /* ── Page title ───────────────────────────────────────────── */
+   /* Large, italic, sweeping; hairline rule + brass left-bar; generous space below */
    .page-title {
      font-family: var(--font-display);
      font-size: clamp(2rem, 6vw, 3.25rem);
@@ -186,7 +192,7 @@
      letter-spacing: -.01em;
      line-height: 1.1;
      color: var(--text);
-     margin-bottom: var(--space-lg);
+     margin-bottom: var(--space-xl);
      padding-bottom: var(--space-lg);
      border-bottom: 1px solid var(--border);
      position: relative;
@@ -249,6 +255,7 @@
    }
    
    /* ── Body text ────────────────────────────────────────────── */
+   /* Lightweight, warm charcoal, ~68ch, slightly muted (readable, not aggressively black) */
    p {
      margin-bottom: var(--space-md);
      color: var(--text-secondary);
@@ -271,6 +278,7 @@
    }
    
    /* ── Artifacts / Figures ─────────────────────────────────── */
+   /* Crisp white cards, soft warm shadow; hover: lift 2px, deeper shadow */
    .artifact {
      margin-block: var(--space-lg);
      background: var(--surface-raised);
@@ -345,6 +353,7 @@
    }
    
    /* ── Code blocks ──────────────────────────────────────────── */
+   /* Near-black warm background, cream type — not cold gray */
    .artifact pre {
      margin: 0;
      padding: var(--space-md) var(--space-lg);
@@ -387,6 +396,7 @@
    }
    
    /* ── Bibliography ─────────────────────────────────────────── */
+   /* Indented, brass left bar (pull-quote / sidebar feel); annotation = italic Cormorant */
    .bib-section {
      margin-bottom: var(--space-lg);
      padding: var(--space-md) var(--space-lg);
@@ -463,6 +473,7 @@
    }
    
    /* ── Dividers ─────────────────────────────────────────────── */
+   /* Thin rule with ✦ centered, floating on background — quiet decorative moment */
    hr {
      border: none;
      border-top: 1px solid var(--border);
@@ -537,6 +548,7 @@
      }
    }
    
+   /* Dark mode (OS preference) — warm brown-black, richer gold accent; candlelight feel */
    @media (prefers-color-scheme: dark) {
      :root {
        --bg:            #141210;
