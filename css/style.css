@@ -319,6 +319,12 @@
      padding: var(--space-md);
      background: var(--bg-2);
    }
+
+   /* Larger screens so artifacts are easier to see (setup, interview, dashboard) */
+   .screenshot-grid--large {
+     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+     gap: var(--space-md);
+   }
    
    .screenshot-grid figure {
      margin: 0;
@@ -386,7 +392,7 @@
    }
    
    /* ── Bibliography ─────────────────────────────────────────── */
-   /* Indented, brass left bar (pull-quote / sidebar feel); annotation = italic Cormorant */
+   /* Indented, brass left bar (pull-quote / sidebar feel); annotation in Cormorant */
    .bib-section {
      margin-bottom: var(--space-lg);
      padding: var(--space-md) var(--space-lg);
@@ -398,7 +404,6 @@
    
    .bib-annotation {
      margin-bottom: var(--space-sm);
-     font-style: italic;
      font-family: var(--font-display);
      font-size: 1.05rem;
      font-weight: 300;
@@ -518,7 +523,8 @@
        gap: var(--space-sm) var(--space-md);
      }
    
-     .screenshot-grid {
+     .screenshot-grid,
+     .screenshot-grid--large {
        grid-template-columns: 1fr;
      }
    

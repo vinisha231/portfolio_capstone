@@ -29,7 +29,7 @@
     <h2>API and Backend Development</h2>
     <section class="bib-section">
       <div class="bib-annotation">
-        <p>The resources below supported the building of the FastAPI backend: defining routes and routers, request/response models with Pydantic, dependency injection for database sessions and auth, CORS for the React frontend, and running the app with Uvicorn. These resources were used to implement the interview, sessions, dashboard, and auth endpoints and to structure the code for clarity and testability.</p>
+        <p>I needed a backend that could define clear routes, validate requests and responses, and plug in database and auth cleanly. I chose FastAPI for its automatic OpenAPI docs and type-driven design; Pydantic made request/response shapes explicit and caught errors early. Uvicorn was the obvious choice to run the ASGI app. Together they worked well—the router layout stayed readable and adding new endpoints stayed straightforward. The list of sources I relied on for this cluster:</p>
       </div>
       <ul class="bib-list">
         <li>Pydantic. (2024). <em>Pydantic documentation</em>. https://docs.pydantic.dev</li>
@@ -41,7 +41,7 @@
     <h2>AWS and Cloud Services</h2>
     <section class="bib-section">
       <div class="bib-annotation">
-        <p>These resources were used to integrate AWS Bedrock for LLM-based question generation and answer evaluation, to configure the Bedrock runtime client (region, model ID), and to understand the Claude and Llama invocation formats. Additional AWS services in the project (e.g. Transcribe, Polly) and deployment on Elastic Beanstalk also drew on AWS documentation.</p>
+        <p>Bedrock was the main integration point for question generation and evaluation, so I needed to get the runtime client, region, and model IDs right and to handle both Claude (Messages API) and Llama (prompt-based) formats. The Bedrock and Boto3 docs were essential for that; they were sometimes dense but accurate. I also used AWS docs for Elastic Beanstalk deployment and for optional services like Transcribe and Polly. The sources that supported this work:</p>
       </div>
       <ul class="bib-list">
         <li>Amazon Web Services. (2024). <em>Amazon Bedrock developer guide</em>. https://docs.aws.amazon.com/bedrock/</li>
@@ -53,7 +53,7 @@
     <h2>Databases and Data Modeling</h2>
     <section class="bib-section">
       <div class="bib-annotation">
-        <p>These resources supported designing and implementing the persistence layer: PostgreSQL as the database, SQLAlchemy for ORM and session management, Alembic for migrations, and the User and InterviewSession models. They informed schema design (e.g. foreign keys, nullable fields, timestamps) and how to load configuration (e.g. <code>DATABASE_URL</code>) across local and cloud environments.</p>
+        <p>I picked PostgreSQL for familiarity and for running on RDS or similar in production. SQLAlchemy gave me an ORM and session lifecycle that fit FastAPI’s dependency-injection style; Alembic made migrations manageable so schema changes were repeatable. The docs were strong on schema design (foreign keys, nullable fields, timestamps) and on loading <code>DATABASE_URL</code> from env in local and cloud setups. The references I used:</p>
       </div>
       <ul class="bib-list">
         <li>PostgreSQL Global Development Group. (2024). <em>PostgreSQL 16 documentation</em>. https://www.postgresql.org/docs/16/</li>
@@ -64,7 +64,7 @@
     <h2>Frontend and UX</h2>
     <section class="bib-section">
       <div class="bib-annotation">
-        <p>These resources supported building the React frontend: components, state management, and calling the FastAPI backend. They informed the interview flow (setup, question/answer, feedback), the dashboard (stats and history), and general UX and accessibility practices for a portfolio and for the simulator itself.</p>
+        <p>I wanted a frontend that could handle the setup → question → answer → feedback flow and talk reliably to the FastAPI backend. React’s component model and state handling fit that; I used the official React docs for hooks and data flow. MDN was my go-to for HTTP and fetch behavior when wiring the client to the API. Both worked well for implementing the interview and dashboard and for thinking about UX and accessibility. Sources:</p>
       </div>
       <ul class="bib-list">
         <li>Meta. (2024). <em>React</em>. https://react.dev</li>
@@ -75,7 +75,7 @@
     <h2>LLMs and Prompting</h2>
     <section class="bib-section">
       <div class="bib-annotation">
-        <p>These resources informed how the capstone uses LLMs via AWS Bedrock: designing system and user prompts for question generation, structuring evaluation prompts with rubrics (technical, behavioral, design), and requesting structured JSON output for scores and feedback. They also supported understanding model behavior and prompt-engineering practices for interview-style tasks.</p>
+        <p>I needed to design prompts that produced good interview questions and evaluation feedback and that returned parseable JSON. Claude’s docs were especially useful for system vs. user prompts and for constraining output; the Bedrock InvokeModel reference was necessary for request shape and model IDs. I used them to build type-specific rubrics (technical, behavioral, design) and to refine prompts until the model returned consistent scores and suggestions. The sources that helped:</p>
       </div>
       <ul class="bib-list">
         <li>Anthropic. (2024). <em>Claude documentation</em>. https://docs.anthropic.com</li>
