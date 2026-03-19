@@ -327,18 +327,22 @@
    }
 
    /* Full-width: one screenshot per row, uses full content width for readability */
-   .screenshot-grid--fullwidth {
+   .artifact .screenshot-grid.screenshot-grid--fullwidth {
+     display: grid;
      grid-template-columns: 1fr;
+     grid-auto-flow: row;
      gap: var(--space-lg);
      padding: var(--space-md) 0;
    }
-   .screenshot-grid--fullwidth figure {
+   .artifact .screenshot-grid.screenshot-grid--fullwidth figure {
      max-width: 100%;
+     min-width: 0;
    }
-   .screenshot-grid--fullwidth img {
+   .artifact .screenshot-grid.screenshot-grid--fullwidth img {
      width: 100%;
      max-width: 100%;
      height: auto;
+     display: block;
    }
    
    .screenshot-grid figure {
