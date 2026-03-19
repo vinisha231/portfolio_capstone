@@ -325,6 +325,21 @@
      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
      gap: var(--space-md);
    }
+
+   /* Full-width: one screenshot per row, uses full content width for readability */
+   .screenshot-grid--fullwidth {
+     grid-template-columns: 1fr;
+     gap: var(--space-lg);
+     padding: var(--space-md) 0;
+   }
+   .screenshot-grid--fullwidth figure {
+     max-width: 100%;
+   }
+   .screenshot-grid--fullwidth img {
+     width: 100%;
+     max-width: 100%;
+     height: auto;
+   }
    
    .screenshot-grid figure {
      margin: 0;
