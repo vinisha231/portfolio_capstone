@@ -24,63 +24,98 @@
 
   <main class="container">
     <h2 class="page-title">Annotated Bibliography</h2>
-    <p>Resources are sorted by theme (alphabetically).</p>
+    <p>Resources are sorted by theme (alphabetically). Each source has a short annotation explaining why it was chosen and how it was used.</p>
 
     <h2>API and Backend Development</h2>
     <section class="bib-section">
-      <div class="bib-annotation">
-        <p>I needed a backend that could define clear routes, validate requests and responses, and plug in database and auth cleanly. I chose FastAPI for its automatic OpenAPI docs and type-driven design; Pydantic made request/response shapes explicit and caught errors early. Uvicorn was the obvious choice to run the ASGI app. Together they worked well—the router layout stayed readable and adding new endpoints stayed straightforward. The list of sources I relied on for this cluster:</p>
+      <div class="bib-item">
+        <p class="bib-citation">Pydantic. (2024). <em>Pydantic documentation</em>. https://docs.pydantic.dev</p>
+        <div class="bib-annotation">
+          <p>I used Pydantic for all request and response models so the API validated input and serialized output consistently. The docs were clear on optional fields, nested models, and custom validators; that made it straightforward to add interview-type-specific bodies and to catch bad payloads before they reached the business logic.</p>
+        </div>
       </div>
-      <ul class="bib-list">
-        <li>Pydantic. (2024). <em>Pydantic documentation</em>. https://docs.pydantic.dev</li>
-        <li>Tiangolo, S. (2024). <em>FastAPI</em>. https://fastapi.tiangolo.com</li>
-        <li>Uvicorn. (n.d.). <em>Uvicorn</em>. https://www.uvicorn.org</li>
-      </ul>
+      <div class="bib-item">
+        <p class="bib-citation">Tiangolo, S. (2024). <em>FastAPI</em>. https://fastapi.tiangolo.com</p>
+        <div class="bib-annotation">
+          <p>I chose FastAPI for its automatic OpenAPI docs and type-driven routing. The dependency-injection system fit how I wanted to plug in database sessions and auth; the tutorial and advanced sections covered exactly what I needed for routers, CORS, and background tasks. It held up well as the API grew.</p>
+        </div>
+      </div>
+      <div class="bib-item">
+        <p class="bib-citation">Uvicorn. (n.d.). <em>Uvicorn</em>. https://www.uvicorn.org</p>
+        <div class="bib-annotation">
+          <p>Uvicorn was the natural choice to run the FastAPI ASGI app locally and in production. The docs are short; I used them to confirm the correct host/port and reload options for development. No issues during the capstone.</p>
+        </div>
+      </div>
     </section>
 
     <h2>AWS and Cloud Services</h2>
     <section class="bib-section">
-      <div class="bib-annotation">
-        <p>Bedrock was the main integration point for question generation and evaluation, so I needed to get the runtime client, region, and model IDs right and to handle both Claude (Messages API) and Llama (prompt-based) formats. The Bedrock and Boto3 docs were essential for that; they were sometimes dense but accurate. I also used AWS docs for Elastic Beanstalk deployment and for optional services like Transcribe and Polly. The sources that supported this work:</p>
+      <div class="bib-item">
+        <p class="bib-citation">Amazon Web Services. (2024). <em>Amazon Bedrock developer guide</em>. https://docs.aws.amazon.com/bedrock/</p>
+        <div class="bib-annotation">
+          <p>I relied on this for the high-level Bedrock model and the runtime API. It explained region availability, model IDs, and the difference between the Converse and InvokeModel APIs. Dense in places but accurate; I used it to decide on Claude 3 Sonnet and to handle both Messages and legacy prompt formats.</p>
+        </div>
       </div>
-      <ul class="bib-list">
-        <li>Amazon Web Services. (2024). <em>Amazon Bedrock developer guide</em>. https://docs.aws.amazon.com/bedrock/</li>
-        <li>Amazon Web Services. (2024). <em>AWS SDK for Python (Boto3)</em>. https://boto3.amazonaws.com/v1/documentation/api/latest/index.html</li>
-        <li>Amazon Web Services. (2024). <em>Elastic Beanstalk developer guide</em>. https://docs.aws.amazon.com/elasticbeanstalk/</li>
-      </ul>
+      <div class="bib-item">
+        <p class="bib-citation">Amazon Web Services. (2024). <em>AWS SDK for Python (Boto3)</em>. https://boto3.amazonaws.com/v1/documentation/api/latest/index.html</p>
+        <div class="bib-annotation">
+          <p>Boto3 was required to call the Bedrock runtime from the FastAPI backend. The API reference and the Bedrock runtime examples showed how to construct the client and invoke the model with the correct payload shape. I used it alongside the Bedrock developer guide for request/response details.</p>
+        </div>
+      </div>
+      <div class="bib-item">
+        <p class="bib-citation">Amazon Web Services. (2024). <em>Elastic Beanstalk developer guide</em>. https://docs.aws.amazon.com/elasticbeanstalk/</p>
+        <div class="bib-annotation">
+          <p>I used this to deploy the FastAPI backend to Elastic Beanstalk. The guide covered environment variables, the Procfile, and how to load config (including <code>get-config</code>). It was enough to get the app running in production; I would use it again for similar deployments.</p>
+        </div>
+      </div>
     </section>
 
     <h2>Databases and Data Modeling</h2>
     <section class="bib-section">
-      <div class="bib-annotation">
-        <p>I picked PostgreSQL for familiarity and for running on RDS or similar in production. SQLAlchemy gave me an ORM and session lifecycle that fit FastAPI’s dependency-injection style; Alembic made migrations manageable so schema changes were repeatable. The docs were strong on schema design (foreign keys, nullable fields, timestamps) and on loading <code>DATABASE_URL</code> from env in local and cloud setups. The references I used:</p>
+      <div class="bib-item">
+        <p class="bib-citation">PostgreSQL Global Development Group. (2024). <em>PostgreSQL 16 documentation</em>. https://www.postgresql.org/docs/16/</p>
+        <div class="bib-annotation">
+          <p>I used the PostgreSQL docs for schema and data types when designing the User and InterviewSession tables. I referenced it for foreign keys, timestamps, and nullable columns. The docs are thorough; I only needed the sections relevant to our schema.</p>
+        </div>
       </div>
-      <ul class="bib-list">
-        <li>PostgreSQL Global Development Group. (2024). <em>PostgreSQL 16 documentation</em>. https://www.postgresql.org/docs/16/</li>
-        <li>The SQLAlchemy Authors. (2024). <em>SQLAlchemy documentation</em>. https://docs.sqlalchemy.org</li>
-      </ul>
+      <div class="bib-item">
+        <p class="bib-citation">The SQLAlchemy Authors. (2024). <em>SQLAlchemy documentation</em>. https://docs.sqlalchemy.org</p>
+        <div class="bib-annotation">
+          <p>SQLAlchemy powered the ORM and session lifecycle. I used the docs for the declarative base, engine and SessionLocal setup, and for wiring sessions into FastAPI via dependency injection. The ORM tutorial and session documentation were the most useful; Alembic was used for migrations and the SQLAlchemy docs pointed me to that workflow.</p>
+        </div>
+      </div>
     </section>
 
     <h2>Frontend and UX</h2>
     <section class="bib-section">
-      <div class="bib-annotation">
-        <p>I wanted a frontend that could handle the setup → question → answer → feedback flow and talk reliably to the FastAPI backend. React’s component model and state handling fit that; I used the official React docs for hooks and data flow. MDN was my go-to for HTTP and fetch behavior when wiring the client to the API. Both worked well for implementing the interview and dashboard and for thinking about UX and accessibility. Sources:</p>
+      <div class="bib-item">
+        <p class="bib-citation">Meta. (2024). <em>React</em>. https://react.dev</p>
+        <div class="bib-annotation">
+          <p>I used the official React docs for components, hooks, and state. The new docs (react.dev) were clear on when to use state vs. props and how to structure the interview flow (setup, question, answer, feedback). I referred to them often while building the setup wizard and the dashboard.</p>
+        </div>
       </div>
-      <ul class="bib-list">
-        <li>Meta. (2024). <em>React</em>. https://react.dev</li>
-        <li>Mozilla Developer Network. (2024). <em>HTTP</em>. https://developer.mozilla.org/en-US/docs/Web/HTTP</li>
-      </ul>
+      <div class="bib-item">
+        <p class="bib-citation">Mozilla Developer Network. (2024). <em>HTTP</em>. https://developer.mozilla.org/en-US/docs/Web/HTTP</p>
+        <div class="bib-annotation">
+          <p>I used MDN for fetch, request/response semantics, and CORS when wiring the React frontend to the FastAPI backend. It helped debug why certain requests failed and how to send JSON and read responses. Reliable and well-explained.</p>
+        </div>
+      </div>
     </section>
 
     <h2>LLMs and Prompting</h2>
     <section class="bib-section">
-      <div class="bib-annotation">
-        <p>I needed to design prompts that produced good interview questions and evaluation feedback and that returned parseable JSON. Claude’s docs were especially useful for system vs. user prompts and for constraining output; the Bedrock InvokeModel reference was necessary for request shape and model IDs. I used them to build type-specific rubrics (technical, behavioral, design) and to refine prompts until the model returned consistent scores and suggestions. The sources that helped:</p>
+      <div class="bib-item">
+        <p class="bib-citation">Anthropic. (2024). <em>Claude documentation</em>. https://docs.anthropic.com</p>
+        <div class="bib-annotation">
+          <p>I used Claude’s docs to design system and user prompts for question generation and evaluation. They were especially useful for constraining output (e.g. JSON only) and for the Messages API format that Bedrock exposes. The prompt-engineering guidance influenced how I structured the rubrics and the evaluation instructions.</p>
+        </div>
       </div>
-      <ul class="bib-list">
-        <li>Anthropic. (2024). <em>Claude documentation</em>. https://docs.anthropic.com</li>
-        <li>Amazon Web Services. (2024). <em>InvokeModel – Bedrock runtime</em>. https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html</li>
-      </ul>
+      <div class="bib-item">
+        <p class="bib-citation">Amazon Web Services. (2024). <em>InvokeModel – Bedrock runtime</em>. https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html</p>
+        <div class="bib-annotation">
+          <p>I needed the exact request body shape and model IDs for invoking Claude and Llama via Bedrock. This API reference gave the structure (body, contentType, accept, modelId) and the differences between model invocation formats. Essential for getting the first successful call working.</p>
+        </div>
+      </div>
     </section>
 
     <p><a href="index.html" class="back-link">Back to portfolio home</a></p>

@@ -344,6 +344,11 @@
      height: auto;
      display: block;
    }
+   .screenshot-grid .screenshot-intro {
+     margin: 0 0 var(--space-xs) 0;
+     font-size: 0.9375rem;
+     color: var(--text-secondary);
+   }
    
    .screenshot-grid figure {
      margin: 0;
@@ -450,6 +455,27 @@
      border-bottom: none;
      margin-bottom: 0;
      padding-bottom: 0;
+   }
+   
+   /* Per-source: citation then annotation */
+   .bib-item {
+     margin-bottom: var(--space-lg);
+     padding-bottom: var(--space-lg);
+     border-bottom: 1px solid var(--border);
+   }
+   .bib-item:last-child {
+     margin-bottom: 0;
+     padding-bottom: 0;
+     border-bottom: none;
+   }
+   .bib-item .bib-citation {
+     font-size: .9rem;
+     line-height: 1.6;
+     color: var(--text);
+     margin-bottom: var(--space-xs);
+   }
+   .bib-item .bib-annotation {
+     margin-bottom: 0;
    }
    
    /* ── Back link ────────────────────────────────────────────── */

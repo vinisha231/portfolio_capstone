@@ -41,49 +41,68 @@
     <p>The user flow centers on login/signup, choosing role/company/difficulty and interview type, then a question–answer–feedback loop with optional follow-ups and session notes. The dashboard shows stats and history once enough sessions are completed. The flow evolved from an initial wireframe (single question type, minimal setup) to the current multi-step setup and three interview types; the screenshots show the current state after those iterations.</p>
 
     <h3>Artifact: Setup flow (7 screens)</h3>
-    <p>Users see login or welcome, then choose role, company, difficulty, and interview type before starting. These seven screens walk through that path so the session is tailored before the first question.</p>
+    <p>The setup flow walks the user from entry to “ready to start.” Each screen is introduced so the reader knows what to look for.</p>
     <div class="artifact">
       <div class="screenshot-grid screenshot-grid--fullwidth">
-        <figure><img src="images/setup-01.png" alt="Setup step 1: welcome or login."><figcaption>Setup 1</figcaption></figure>
-        <figure><img src="images/setup-02.png" alt="Setup step 2: role, company, or options."><figcaption>Setup 2</figcaption></figure>
-        <figure><img src="images/setup-03.png" alt="Setup step 3: interview type or difficulty."><figcaption>Setup 3</figcaption></figure>
-        <figure><img src="images/setup-04.png" alt="Setup step 4: configuration."><figcaption>Setup 4</figcaption></figure>
-        <figure><img src="images/setup-05.png" alt="Setup step 5: configuration."><figcaption>Setup 5</figcaption></figure>
-        <figure><img src="images/setup-06.png" alt="Setup step 6: configuration."><figcaption>Setup 6</figcaption></figure>
-        <figure><img src="images/setup-07.png" alt="Setup step 7: ready to start interview."><figcaption>Setup 7</figcaption></figure>
+        <p class="screenshot-intro">The flow starts at the welcome or login screen.</p>
+        <figure><img src="images/setup-01.png" alt="Welcome or login screen."><figcaption>Welcome or login.</figcaption></figure>
+        <p class="screenshot-intro">The user then selects role and company (or leaves them optional).</p>
+        <figure><img src="images/setup-02.png" alt="Role and company selection."><figcaption>Role and company selection.</figcaption></figure>
+        <p class="screenshot-intro">Interview type (Technical, Behavioral, Design) and difficulty are chosen next.</p>
+        <figure><img src="images/setup-03.png" alt="Interview type and difficulty."><figcaption>Interview type and difficulty.</figcaption></figure>
+        <p class="screenshot-intro">Configuration continues: options such as programming language for technical interviews.</p>
+        <figure><img src="images/setup-04.png" alt="Configuration options."><figcaption>Configuration (e.g. language).</figcaption></figure>
+        <p class="screenshot-intro">Further configuration or confirmation before starting.</p>
+        <figure><img src="images/setup-05.png" alt="Configuration or confirmation."><figcaption>Configuration or confirmation.</figcaption></figure>
+        <p class="screenshot-intro">Final step before the interview begins.</p>
+        <figure><img src="images/setup-06.png" alt="Final setup step."><figcaption>Final setup step.</figcaption></figure>
+        <p class="screenshot-intro">The user is ready to start; the first question will load from here.</p>
+        <figure><img src="images/setup-07.png" alt="Ready to start interview."><figcaption>Ready to start interview.</figcaption></figure>
       </div>
     </div>
 
     <h3>Artifact: Interview flow (16 screens)</h3>
-    <p>Each round follows the same pattern: the system shows a question, the user submits an answer, and the AI returns feedback with a score and suggestions; follow-up questions are optional. The 16 screens capture that loop across several rounds so the flow is visible step by step.</p>
+    <p>Each round follows the same pattern: the system shows a question, the user submits an answer, and the AI returns feedback with a score and suggestions; follow-up questions are optional. The screens walk through that loop so the reader can see what to look at on each step.</p>
     <div class="artifact">
       <div class="screenshot-grid screenshot-grid--fullwidth">
-        <figure><img src="images/interview-01.png" alt="Interview step 1: question or answer."><figcaption>Interview 1</figcaption></figure>
-        <figure><img src="images/interview-02.png" alt="Interview step 2."><figcaption>Interview 2</figcaption></figure>
-        <figure><img src="images/interview-03.png" alt="Interview step 3."><figcaption>Interview 3</figcaption></figure>
-        <figure><img src="images/interview-04.png" alt="Interview step 4."><figcaption>Interview 4</figcaption></figure>
-        <figure><img src="images/interview-05.png" alt="Interview step 5."><figcaption>Interview 5</figcaption></figure>
-        <figure><img src="images/interview-06.png" alt="Interview step 6."><figcaption>Interview 6</figcaption></figure>
-        <figure><img src="images/interview-07.png" alt="Interview step 7."><figcaption>Interview 7</figcaption></figure>
-        <figure><img src="images/interview-08.png" alt="Interview step 8."><figcaption>Interview 8</figcaption></figure>
-        <figure><img src="images/interview-09.png" alt="Interview step 9."><figcaption>Interview 9</figcaption></figure>
-        <figure><img src="images/interview-10.png" alt="Interview step 10."><figcaption>Interview 10</figcaption></figure>
-        <figure><img src="images/interview-11.png" alt="Interview step 11."><figcaption>Interview 11</figcaption></figure>
-        <figure><img src="images/interview-12.png" alt="Interview step 12."><figcaption>Interview 12</figcaption></figure>
-        <figure><img src="images/interview-13.png" alt="Interview step 13."><figcaption>Interview 13</figcaption></figure>
-        <figure><img src="images/interview-14.png" alt="Interview step 14."><figcaption>Interview 14</figcaption></figure>
-        <figure><img src="images/interview-15.png" alt="Interview step 15."><figcaption>Interview 15</figcaption></figure>
-        <figure><img src="images/interview-16.png" alt="Interview step 16."><figcaption>Interview 16</figcaption></figure>
+        <p class="screenshot-intro">The generated question is displayed for the user to read.</p>
+        <figure><img src="images/interview-01.png" alt="Generated question displayed."><figcaption>Generated question displayed.</figcaption></figure>
+        <p class="screenshot-intro">The user types (or speaks) their answer in the input area.</p>
+        <figure><img src="images/interview-02.png" alt="Answer input."><figcaption>Answer input.</figcaption></figure>
+        <p class="screenshot-intro">After submit, the AI returns feedback with a score and suggestions.</p>
+        <figure><img src="images/interview-03.png" alt="Feedback with score and suggestions."><figcaption>Feedback with score and suggestions.</figcaption></figure>
+        <p class="screenshot-intro">The user can request a follow-up question or move to the next round.</p>
+        <figure><img src="images/interview-04.png" alt="Follow-up or next round."><figcaption>Follow-up or next round.</figcaption></figure>
+        <p class="screenshot-intro">A new question is shown; the loop repeats.</p>
+        <figure><img src="images/interview-05.png" alt="New question."><figcaption>New question.</figcaption></figure>
+        <p class="screenshot-intro">Answer and submit again.</p>
+        <figure><img src="images/interview-06.png" alt="Answer input."><figcaption>Answer input.</figcaption></figure>
+        <p class="screenshot-intro">Feedback for this round.</p>
+        <figure><img src="images/interview-07.png" alt="Feedback."><figcaption>Feedback.</figcaption></figure>
+        <p class="screenshot-intro">Optional follow-up or continue.</p>
+        <figure><img src="images/interview-08.png" alt="Follow-up or continue."><figcaption>Follow-up or continue.</figcaption></figure>
+        <p class="screenshot-intro">Further rounds follow the same question–answer–feedback pattern.</p>
+        <figure><img src="images/interview-09.png" alt="Another round."><figcaption>Another round.</figcaption></figure>
+        <figure><img src="images/interview-10.png" alt="Question and answer flow."><figcaption>Question and answer flow.</figcaption></figure>
+        <figure><img src="images/interview-11.png" alt="Feedback and score."><figcaption>Feedback and score.</figcaption></figure>
+        <figure><img src="images/interview-12.png" alt="Next or follow-up."><figcaption>Next or follow-up.</figcaption></figure>
+        <figure><img src="images/interview-13.png" alt="Question displayed."><figcaption>Question displayed.</figcaption></figure>
+        <figure><img src="images/interview-14.png" alt="Answer and feedback."><figcaption>Answer and feedback.</figcaption></figure>
+        <figure><img src="images/interview-15.png" alt="Score and suggestions."><figcaption>Score and suggestions.</figcaption></figure>
+        <figure><img src="images/interview-16.png" alt="End of round or session."><figcaption>End of round or session.</figcaption></figure>
       </div>
     </div>
 
     <h3>Artifact: Dashboard (3 screens)</h3>
-    <p>After sessions are completed, the dashboard shows aggregate stats, recent sessions, and history so users can track progress and see strengths and areas to improve. The three screens show the overview and detail views.</p>
+    <p>After sessions are completed, the dashboard shows aggregate stats, recent sessions, and history. The three screens below show what the user sees: overview first, then detail.</p>
     <div class="artifact">
       <div class="screenshot-grid screenshot-grid--fullwidth">
-        <figure><img src="images/dashboard-01.png" alt="Dashboard: stats overview."><figcaption>Dashboard 1</figcaption></figure>
-        <figure><img src="images/dashboard-02.png" alt="Dashboard: session or history detail."><figcaption>Dashboard 2</figcaption></figure>
-        <figure><img src="images/dashboard-03.png" alt="Dashboard: history or strengths."><figcaption>Dashboard 3</figcaption></figure>
+        <p class="screenshot-intro">The dashboard opens with an overview of stats and recent activity.</p>
+        <figure><img src="images/dashboard-01.png" alt="Dashboard: stats overview."><figcaption>Stats overview and recent activity.</figcaption></figure>
+        <p class="screenshot-intro">The user can open a specific session or history entry for detail.</p>
+        <figure><img src="images/dashboard-02.png" alt="Dashboard: session or history detail."><figcaption>Session or history detail.</figcaption></figure>
+        <p class="screenshot-intro">History and strength/weakness summaries help users focus their practice.</p>
+        <figure><img src="images/dashboard-03.png" alt="Dashboard: history or strengths."><figcaption>History and strengths view.</figcaption></figure>
       </div>
     </div>
 
@@ -156,7 +175,9 @@ Return ONLY the question, no additional text.
     <p>When Bedrock is unavailable (e.g. missing credentials or region limits), the backend falls back to a curated list of questions per interview type and difficulty instead of failing the request. In <code>app/routers/interview.py</code>, <code>generate_question</code> calls Bedrock first; on exception it logs a warning and selects a random question from the fallback dict (technical/behavioral/design × easy/medium/hard). The response includes a <code>model</code> field (<code>"bedrock"</code> or <code>"local-fallback"</code>) so the frontend can show where the question came from. Similarly, evaluation and follow-up use try/except so the app degrades gracefully. Deployment moved to AWS Elastic Beanstalk (see <code>.ebextensions</code>, <code>Procfile</code>, <code>Dockerfile</code> in the backend); environment variables are loaded from the EB console or <code>get-config</code> so <code>DATABASE_URL</code> and <code>AWS_REGION</code> work in production.</p>
     <h3>Artifact: Before/after or evolution</h3>
     <div class="artifact">
-      <p>Evolution: (1) Question flow — from fixed sample questions to Bedrock-generated with fallback. (2) Evaluation — from simple scoring to rubric-based, type-specific feedback with <code>strength_highlight</code> and JSON output. (3) Deployment — local only to Elastic Beanstalk with env-based config. A before/after diagram or screenshot can be added to <code>images/</code> to visualize the pivot.</p>
+      <p><strong>Question flow.</strong> The first version used fixed sample questions per type and difficulty. After integrating Bedrock, questions were generated by the LLM; when Bedrock was unavailable, the app fell back to that same curated list so the experience stayed consistent and the app did not break.</p>
+      <p><strong>Evaluation.</strong> Early evaluation was a single score or free-form text. The pivot was to rubric-based, type-specific feedback (technical: problem understanding, approach, accuracy, communication; behavioral: STAR; design: requirements, design, scalability) with structured JSON output including <code>strength_highlight</code>, <code>feedback</code>, dimension scores, and <code>suggestions</code>. That let the frontend display scores and suggestions reliably instead of parsing paragraphs.</p>
+      <p><strong>Deployment.</strong> The app ran only locally at first. Moving to Elastic Beanstalk with env-based config (<code>DATABASE_URL</code>, <code>AWS_REGION</code>, <code>BEDROCK_MODEL_ID</code>) made it deployable and shareable; the same codebase now runs in both environments.</p>
     </div>
 
     <h2>Testing and Quality</h2>
